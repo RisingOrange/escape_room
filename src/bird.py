@@ -5,7 +5,7 @@ from asciimatics.exceptions import ResizeScreenError
 from asciimatics.renderers import FigletText, StaticRenderer
 from asciimatics.scene import Scene
 from asciimatics.screen import Screen
-from utils import *
+from .utils import *
 
 SLEEP_TIME = 0.005
 

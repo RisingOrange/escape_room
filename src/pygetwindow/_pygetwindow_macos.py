@@ -7,7 +7,7 @@ import time
 import AppKit
 import Quartz
 import Cocoa
-from pygetwindow import PyGetWindowException, pointInRect, BaseWindow, Rect, Point, Size
+from src.pygetwindow import PyGetWindowException, pointInRect, BaseWindow, Rect, Point, Size
 
 """ 
 IMPORTANT NOTICE:

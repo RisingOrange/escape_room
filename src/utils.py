@@ -1,6 +1,6 @@
 import time
 
-import pygetwindow as gw
+from . import pygetwindow as gw
 
 
 def get_active_window_rect():

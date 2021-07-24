@@ -1,6 +1,7 @@
 from asciimatics.event import MouseEvent
 from asciimatics.screen import Screen
-from game_utils import *
+from .game_utils import *
+from .utils import get_active_window_rect
 import random
 
 bugs = [

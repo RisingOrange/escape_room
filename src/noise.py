@@ -15,8 +15,13 @@ FRAME_DELAY = 0.15
 # amount of correctly typed chars (gets reset to 0 when a wrong char gets typed)
 progress = 0
 
-# positions were no noise will show up anymore
+# positions where no noise will show up anymore
 disabled_positions = set()
+
+# the next this many frames will be drawn without a delay before them
+# calling screen.draw_next_frame() somehow does not show the newest changes, as a workaround a
+# couple of frames are drawn without delay right after an update to the scenes was made
+no_delay_frame_count = 0
 
 
 def draw_hints(screen, disabled_positions):
@@ -62,8 +67,11 @@ class MyNoise(RandomNoise):
         return super().process_event(event)
 
     def disable_pos(self, x, y):
+        global no_delay_frame_count
+
         self._screen.print_at(' ', x, y)
         self._disabled_positions.add((x, y))
+        no_delay_frame_count = 5
 
     def update(self, frame_no):
         if not self._generate_next:
@@ -108,8 +116,8 @@ def figlet_chars(screen, text, y=2, x=2, colour=Screen.COLOUR_WHITE):
     return result
 
 
-def main(screen):
-    global progress
+def demo(screen):
+    global progress, no_delay_frame_count
 
     noise = MyNoise(screen, disabled_positions)
     main_effects = [
@@ -129,6 +137,7 @@ def main(screen):
     screen.set_scenes([Scene(main_effects + message_effects)])
 
     prev_frame_time = time.time() - FRAME_DELAY
+
     while progress < len(message):
         if screen.has_resized():
             raise ResizeScreenError("")
@@ -149,19 +158,27 @@ def main(screen):
                         screen, message[:progress], colour=Screen.COLOUR_WHITE, y=message_y)
                     progress = 0
             screen.set_scenes([Scene(main_effects + message_effects)])
+            no_delay_frame_count = 5
 
-
-        if time.time() - prev_frame_time > FRAME_DELAY:
+        if time.time() - prev_frame_time > FRAME_DELAY or no_delay_frame_count > 0:
             prev_frame_time = time.time()
+
+            if no_delay_frame_count > 0:
+                no_delay_frame_count -= 1
+
             screen.draw_next_frame()
             noise.update_frame()
             draw_hints(screen, disabled_positions)
-            screen.refresh()
+
 
 def main():
     while True:
         try:
-            Screen.wrapper(main)
+            Screen.wrapper(demo)
             sys.exit(0)
         except ResizeScreenError:
             pass
+
+
+if __name__ == '__main__':
+    main()

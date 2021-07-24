@@ -1,11 +1,12 @@
-from bird import main
+from src.homescreen import main
 main()
 
-from sweep import main
+from src.bird import main
 main()
 
-from noise import main
+from src.sweep import main
 main()
 
-from homescreen import main
+from src.noise import main
 main()
+

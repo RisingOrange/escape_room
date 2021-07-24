@@ -1,7 +1,7 @@
 from asciimatics.screen import Screen
 
-from game_utils import display_dialogue, set_screen_size
-from sweep_games import game1, game2
+from .game_utils import display_dialogue, set_screen_size, disable_mouse_tracking
+from .sweep_games import game1, game2
 
 worlds = []
 
@@ -57,7 +57,12 @@ def demo(screen):
     display_dialogue(screen, texts[0:3], box_dimensions=(50, 6))
     game1(screen)
     display_dialogue(screen, texts[3:7], box_dimensions=(50, 6))
-    game2(screen)
+
+    try:
+        game2(screen)
+    except:
+        disable_mouse_tracking()
+
     display_dialogue(screen, texts[12:], box_dimensions=(50, 6))
 
     game_fin = True
@@ -65,3 +70,6 @@ def demo(screen):
 def main():
     while not game_fin: 
         Screen.wrapper(demo)
+
+if __name__ == '__main__':
+    main()
