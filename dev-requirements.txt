@@ -12,3 +12,13 @@ flake8-annotations~=2.0
 flake8-bandit~=2.1
 flake8-docstrings~=1.5
 flake8-isort~=4.0
+
+# dependencies
+ewmh==0.1.6; sys_platform == 'linux'
+asciimatics==1.13.0
+PyRect==0.1.4
+pygame==2.0.1
+PyAutoGUI==0.9.53; sys_platform == 'linux'
+AppKit==0.2.8; sys_platform == 'darwin'
+Quartz==0.0.1.dev0; sys_platform == 'darwin'
+python-xlib==0.31; sys_platform == 'linux'
