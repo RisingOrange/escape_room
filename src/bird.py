@@ -13,6 +13,7 @@ TERMINAL_SIZE = (50, 20)
 
 game_fin = False
 
+
 def window_relative_pos(screen, x=0, y=0):
     # given a screen object and the position of something (in tiles)
     # calculate the position (in tiles) of an effect so that when the effect is played in the
@@ -227,6 +228,7 @@ def main():
             Screen.wrapper(main_)
         except ResizeScreenError:
             pass
+
 
 if __name__ == '__main__':
     main()

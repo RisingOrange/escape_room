@@ -1,13 +1,13 @@
-from asciimatics.screen import Screen
-from asciimatics.event import KeyboardEvent
+from time import sleep
+import curses
+import asyncio
 
 import os
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame as pg
 
-import asyncio
-import curses
-from time import sleep
+from asciimatics.screen import Screen
+from asciimatics.event import KeyboardEvent
 
 
 

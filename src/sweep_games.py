@@ -5,29 +5,31 @@ from .utils import get_active_window_rect
 import random
 
 bugs = [
-'''\(")/
+    '''\(")/
 -( )-
 /(_)\\''',
-''' __     ,
+    ''' __     ,
 (__).o.@c
  /  |  \  ''',
-'''  __         
+    '''  __         
 _/__)   
 (8|)_}}-
 `\__)  ''',
-'''  ,,
+    '''  ,,
   oo
  /==\\
 (/==\)
   \/  ''',
-'''    .----.   @   @
+    '''    .----.   @   @
    / .-"-.`.  \\v/
    | | '\ \ \_/ )
  ,-\ `-.' /.'  /
 '---`----'----'''
 ]
 
-overlap = lambda b1, b2: not (b1[2] < b2[0] or b2[2] < b1[0] or b1[3] < b2[1] or b2[3] < b1[1])
+
+def overlap(b1, b2): return not (b1[2] < b2[0] or b2[2] < b1[0] or b1[3] < b2[1] or b2[3] < b1[1])
+
 
 def game1(screen: Screen):
     #update_gun_ui('😃', '︻デ═一', 3)
@@ -37,11 +39,11 @@ def game1(screen: Screen):
 
     screen.clear_buffer(0, 0, 0)
     intro_msg = 'During the game:\n\n<Press C for controls>\n<Press H for a hint>'
-    start_msg='<Press any key to start>'
-    display_help(screen, intro_msg) 
+    start_msg = '<Press any key to start>'
+    display_help(screen, intro_msg)
     await_continue(screen, screen.width // 2 - len(start_msg) // 2, screen.height // 2 + 5, cont_msg=start_msg)
 
-    clear_condition_met = False 
+    clear_condition_met = False
 
     reticle_x, reticle_y = 0, 0
     restart_mouse_tracking()
@@ -51,7 +53,7 @@ def game1(screen: Screen):
 
     num_bugs = 5
 
-    bug_boxes = [] # defines the boundries of the box
+    bug_boxes = []  # defines the boundries of the box
     game_bugs = []
 
     w, h = 150, 40
@@ -104,8 +106,8 @@ def game1(screen: Screen):
         fired = False
         got_hint = False
         got_controls = False
-    
-        while event is not None: # catch up to past events
+
+        while event is not None:  # catch up to past events
             if isinstance(event, MouseEvent):
                 reticle_x, reticle_y = event.x, event.y
                 if event.buttons == 1:
@@ -116,7 +118,7 @@ def game1(screen: Screen):
                     got_controls = True
                 if key_char == 'h':
                     got_hint = True
-                
+
             event = screen.get_event()
 
         if got_controls:
@@ -136,7 +138,7 @@ def game1(screen: Screen):
                     h = await_key(screen, 'h')
                     if not h:
                         break
-            
+
             cont_msg = ' ' * len(cont_msg)
             screen.print_at(cont_msg, screen.width // 2 - len(cont_msg) // 2, screen.height // 2 + 6)
             # cont_msg = '<Press any key to continue>'
@@ -160,16 +162,16 @@ def game1(screen: Screen):
 
 def game2(screen: Screen):
     _, _, w, h = get_active_window_rect()
-    tile_width, tile_height = w / screen.width, h / screen.height 
+    tile_width, tile_height = w / screen.width, h / screen.height
 
     mw, mh = get_monitor_size()
     monitor_width, monitor_height = int(mw / tile_width), int(mh / tile_height)
     bx1, by1 = 10, screen.height // 2
-    bx2, by2 = monitor_width - 10, monitor_height -  10
+    bx2, by2 = monitor_width - 10, monitor_height - 10
 
     num_bugs = 5
 
-    bug_boxes = [] # defines the boundries of the box
+    bug_boxes = []  # defines the boundries of the box
     game_bugs = []
 
     for i in range(num_bugs):
@@ -220,10 +222,10 @@ def game2(screen: Screen):
         fired = False
         got_hint = False
         got_controls = False
-     
+
         event = screen.get_event()
 
-        while event is not None: # catch up to past events
+        while event is not None:  # catch up to past events
             if isinstance(event, KeyboardEvent):
                 key_char = chr(event.key_code).lower()
                 if key_char == 'c':
@@ -232,7 +234,7 @@ def game2(screen: Screen):
                     got_hint = True
                 if key_char == ' ':
                     fired = True
-                
+
             event = screen.get_event()
 
         if got_controls:
@@ -252,14 +254,14 @@ def game2(screen: Screen):
                     h = await_key(screen, 'h')
                     if not h:
                         break
-            
+
             cont_msg = ' ' * len(cont_msg)
             screen.print_at(cont_msg, screen.width // 2 - len(cont_msg) // 2, screen.height // 2 + 6)
             cont_msg = '<Press any key to continue>'
             screen.print_at(cont_msg, screen.width // 2 - len(cont_msg) // 2, screen.height // 2 + 6)
             screen.refresh()
             await_key(screen, 'b')
-            
+
         x, y, _, _ = get_active_window_rect()
         tiled_x, tiled_y = int(x / tile_width), int(y / tile_height)
 

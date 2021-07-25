@@ -9,6 +9,8 @@ def get_active_window_rect():
         return get_active_window_rect.last_result
     except Exception:
         return get_active_window_rect.last_result
+
+
 get_active_window_rect.last_result = [0, 0, 100, 100]
 
 

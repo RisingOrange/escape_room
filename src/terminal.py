@@ -10,7 +10,7 @@ class Terminal(Frame):
 
     def __init__(self, screen, callback):
         super().__init__(
-            screen, 
+            screen,
             height=1,
             width=screen.width,
             y=screen.height-1,
@@ -24,7 +24,7 @@ class Terminal(Frame):
         self.fix()
 
         self._callback = callback
-    
+
     def process_event(self, event):
         if isinstance(event, KeyboardEvent) and event.key_code == ord("\n"):
             self._callback(self._text.value)
@@ -38,6 +38,7 @@ def main(screen):
         terminal
     ]
     screen.play([Scene(effects)])
+
 
 if __name__ == '__main__':
     Screen.wrapper(main)

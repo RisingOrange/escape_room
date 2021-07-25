@@ -7,6 +7,7 @@ worlds = []
 
 game_fin = False
 
+
 def demo(screen):
     global game_fin
 
@@ -23,17 +24,17 @@ def demo(screen):
         'Understood? Good, now get to work.',
         'Well done. Truly brilliant. Your noscoping was incredible.',
         'Damn it, those children are back. I really hope they don\'t-',
-        'Well, it appears the children have stolen your legs. No good. But hey, you still '\
+        'Well, it appears the children have stolen your legs. No good. But hey, you still '
         'have arms.',
         'We\'ll mount you on a robotic frame and you\'ll do more of the same, but not, or something',
         'Nicely done. Now, there\'s one more thing-',
         'Oh no, the children. It would sure be a shame if they-',
-        'Good news? The status of your legs has not changed. Bad news? Your '\
+        'Good news? The status of your legs has not changed. Bad news? Your '
         'arms have mysteriously disappeared.',
-        'You still have to do your job though, so here\'s a shotgun. Yeah, it\'s '\
+        'You still have to do your job though, so here\'s a shotgun. Yeah, it\'s '
         'pretty small, but you\'ll figure something out',
-        'Well, uh, I guess you\'re done for the day. Kind of strange how you\'re '\
-        'getting paid what, $960,781,132 for a one-time janitorial job? Honestly, '\
+        'Well, uh, I guess you\'re done for the day. Kind of strange how you\'re '
+        'getting paid what, $960,781,132 for a one-time janitorial job? Honestly, '
         'this sounds like a money-laundering sch-',
         '...',
         'Uh, I\'ll be off. Have a good day sir.'
@@ -67,9 +68,11 @@ def demo(screen):
 
     game_fin = True
 
+
 def main():
-    while not game_fin: 
+    while not game_fin:
         Screen.wrapper(demo)
+
 
 if __name__ == '__main__':
     main()
